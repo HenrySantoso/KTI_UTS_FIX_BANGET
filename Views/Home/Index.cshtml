@@ -1,0 +1,81 @@
+﻿@{
+    
+}
+
+<div class="text-center my-5 py-5">
+    <!-- Main Title -->
+    <h1 class="display-3 font-weight-bold">
+        <i class="fas fa-lock text-primary"></i> Welcome @ViewBag.username!
+    </h1>
+    
+    <!-- Subtitle -->
+    <h2 class="text-muted">Your Journey in Secure Coding with ASP.NET MVC Starts Here</h2>
+
+    <!-- Highlighted Section -->
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <div class="alert alert-info" role="alert">
+                <h4 class="alert-heading">
+                    <i class="fas fa-shield-alt text-info"></i> Protect Your Application!
+                </h4>
+                <p>
+                    Explore security best practices, implement authentication, and safeguard your data 
+                    with the latest ASP.NET MVC features.
+                </p>
+                <hr>
+                <p class="mb-0">
+                    <strong>Tip:</strong> Start by reviewing the <a href="#" class="alert-link">Secure Coding Guidelines</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feature Cards -->
+    <div class="row text-center mt-4">
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <i class="fas fa-key fa-3x text-success mb-3"></i>
+                    <h5 class="card-title">Strong Authentication</h5>
+                    <p class="card-text">Learn how to implement secure user authentication with industry best practices.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <i class="fas fa-user-shield fa-3x text-danger mb-3"></i>
+                    <h5 class="card-title">Authorization Control</h5>
+                    <p class="card-text">Control access and permissions using roles and claims-based authorization.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <i class="fas fa-shield-virus fa-3x text-warning mb-3"></i>
+                    <h5 class="card-title">Data Protection</h5>
+                    <p class="card-text">Encrypt sensitive data to ensure its confidentiality and integrity.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="d-flex justify-content-center mt-5">
+        <div class="mx-3">
+            <!-- Login Button -->
+            <a href="/Account/Login" class="btn btn-lg btn-success px-5">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </a>
+        </div>
+        <div class="mx-3">
+            <!-- Register Button -->
+            <a href="/Account/Register" class="btn btn-lg btn-info px-5">
+                <i class="fas fa-user-plus"></i> Registration
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+﻿@model SampleSecureWeb.ViewModels.LoginViewModel
+
+<div class="row justify-content-center">
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                Login
+            </div>
+            <div class="card-body">
+                @if (ViewBag.Message != null)
+
+
+
+                {
+                    <div class="alert alert-success mb-3">
+                        @ViewBag.Message
+                    </div>
+                }
+
+                @* Display error message if password is incorrect *@
+                @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Password"] != null)
+
+
+
+                {
+                    var errors = ViewData.ModelState["Password"].Errors;
+                    if (errors.Count > 0)
+                    {
+                        <div class="alert alert-danger mb-3">
+                            Invalid username or password.
+                        </div>
+                    }
+
+                }
+
+                <form asp-action="Login">
+                    <input type="hidden" asp-for="ReturnUrl">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="form-group mb-3">
+                        <input asp-for="Username" class="form-control form-control-user" placeholder="Username" />
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3 position-relative">
+                        <input asp-for="Password" class="form-control form-control-user" id="password" placeholder="Password" type="password" />
+                        <button type="button" onclick="togglePassword()" class="btn btn-secondary btn-sm position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">
+                            Show
+                        </button>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group form-check mb-3">
+                        <input asp-for="RememberLogin" class="form-check-input">
+                        <label asp-for="RememberLogin" class="form-check-label">
+                            <strong>Remember Me</strong>
+                        </label>
+                    </div>
+                    <div class="form-group mb-3">
+                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Login" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center mt-3">
+    <a href="/Account/ChangePassword" class="btn btn-lg btn-info px-5">
+        <i class="fas fa-user-plus"></i> Change Password
+    </a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        // Toggle password visibility
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            var toggleButton = event.currentTarget;
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleButton.innerText = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleButton.innerText = "Show";
+            }
+        }
+    </script>
+}

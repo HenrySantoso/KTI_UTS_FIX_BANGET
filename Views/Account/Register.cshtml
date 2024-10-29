@@ -1,0 +1,99 @@
+﻿@model SampleSecureWeb.ViewModels.RegistrationViewModel
+
+<div class="row justify-content-center">
+    <div class="col-lg-4 col-md-6 col-sm-8">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header text-center">
+                <h4>Registration</h4>
+            </div>
+            <div class="card-body">
+                @if(ViewBag.Message != null)
+                {
+                    <div class="alert alert-success mb-3">
+                        @ViewBag.Message
+                    </div>
+                }
+                <form asp-action="Register">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    <div class="form-group mb-3">
+                        <input asp-for="Username" class="form-control form-control-user" placeholder="Username"/>
+                        <span asp-validation-for="Username" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3 position-relative">
+                        <input asp-for="Password" class="form-control" id="password" placeholder="Password" oninput="checkPasswordStrength()" type="password"/>
+                        <button type="button" onclick="togglePassword()" class="btn btn-secondary btn-sm position-absolute" style="right: 10px; top: 50%; transform: translateY(-50%);">
+                            Show
+                        </button>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <div id="password-strength" class="mt-2"></div> 
+                    </div>
+                    <div class="form-group mb-3">
+                        <input asp-for="ConfirmPassword" class="form-control form-control-user" placeholder="Confirm Password"/>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3 text-center">
+                        <input type="submit" class="btn btn-primary btn-user btn-block" value="Register"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    @* Password Strength Meter *@
+    <script>
+        function checkPasswordStrength() {
+            var strength = 0;
+            var password = document.getElementById('password').value;
+            
+            // Check password criteria
+            if (password.length >= 12) strength += 1;
+            if (/[A-Z]/.test(password)) strength += 1;
+            if (/[a-z]/.test(password)) strength += 1;
+            if (/[0-9]/.test(password)) strength += 1;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+
+            // Map strength value to text
+            var strengthText = '';
+            switch (strength) {
+                case 0:
+                case 1:
+                    strengthText = 'Very Weak';
+                    break;
+                case 2:
+                    strengthText = 'Weak';
+                    break;
+                case 3:
+                    strengthText = 'Medium';
+                    break;
+                case 4:
+                    strengthText = 'Strong';
+                    break;
+                case 5:
+                    strengthText = 'Very Strong';
+                    break;
+            }
+            
+            // Update the UI with the strength level
+            document.getElementById('password-strength').innerText = strengthText;
+        }
+
+        // Toggle password visibility
+        function togglePassword() {
+            var passwordField = document.getElementById('password');
+            var toggleButton = event.currentTarget;
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleButton.innerText = "Hide";
+            } else {
+                passwordField.type = "password";
+                toggleButton.innerText = "Show";
+            }
+        }
+    </script>
+}
